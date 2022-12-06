@@ -3,6 +3,7 @@
 package com.deflatedpickle.lookatmystuff.mixin;
 
 import com.deflatedpickle.lookatmystuff.client.api.BodyRender;
+import com.deflatedpickle.lookatmystuff.client.api.PlayerData;
 import com.deflatedpickle.lookatmystuff.client.render.BodyShieldItem;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.entity.model.BipedEntityModel;
@@ -19,31 +20,32 @@ import org.spongepowered.asm.mixin.Mixin;
 public class MixinShieldItem implements BodyRender {
   @NotNull
   @Override
-  public Vec3f getScale(boolean sneaking) {
-    return BodyShieldItem.INSTANCE.getScale(sneaking);
+  public Vec3f getScale(@NotNull PlayerData data) {
+    return BodyShieldItem.INSTANCE.getScale(data);
   }
 
   @NotNull
   @Override
-  public Vec3d getTranslation(boolean sneaking) {
-    return BodyShieldItem.INSTANCE.getTranslation(sneaking);
+  public Vec3d getTranslation(@NotNull PlayerData data) {
+    return BodyShieldItem.INSTANCE.getTranslation(data);
   }
 
   @NotNull
   @Override
-  public Vec3f getRotation(boolean sneaking) {
-    return BodyShieldItem.INSTANCE.getRotation(sneaking);
+  public Vec3f getRotation(@NotNull PlayerData data) {
+    return BodyShieldItem.INSTANCE.getRotation(data);
   }
 
   @NotNull
   @Override
-  public ModelTransformation.Mode getRenderMode(boolean sneaking) {
-    return BodyShieldItem.INSTANCE.getRenderMode(sneaking);
+  public ModelTransformation.Mode getRenderMode(@NotNull PlayerData data) {
+    return BodyShieldItem.INSTANCE.getRenderMode(data);
   }
 
   @NotNull
   @Override
-  public ModelPart getModelPart(@NotNull BipedEntityModel<PlayerEntity> model, boolean sneaking) {
-    return BodyShieldItem.INSTANCE.getModelPart(model, sneaking);
+  public ModelPart getModelPart(
+      @NotNull BipedEntityModel<PlayerEntity> model, @NotNull PlayerData data) {
+    return BodyShieldItem.INSTANCE.getModelPart(model, data);
   }
 }

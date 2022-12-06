@@ -4,6 +4,7 @@ package com.deflatedpickle.lookatmystuff.client
 
 import com.deflatedpickle.lookatmystuff.LookAtMyStuff
 import com.deflatedpickle.lookatmystuff.client.api.BodyRender
+import com.deflatedpickle.lookatmystuff.client.api.PlayerData
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.render.OverlayTexture
 import net.minecraft.client.render.VertexConsumerProvider
@@ -32,7 +33,12 @@ class ToolFeatureRenderer<T : PlayerEntity, M : BipedEntityModel<T>>(
         headYaw: Float,
         headPitch: Float
     ) {
-        val stackList = (entity as PlayerEntity).inventory.main.subList(0, 9)
+        val stackList = entity.inventory.main.subList(0, 9)
+
+        val data = PlayerData(
+            entity.isSneaking,
+            entity.mainArm.ordinal
+        )
 
         for (stack in stackList) {
             if (stack == entity.mainHandStack) continue
@@ -47,21 +53,21 @@ class ToolFeatureRenderer<T : PlayerEntity, M : BipedEntityModel<T>>(
                 renderStack?.let {
                     matrices.push()
 
-                    with(renderStack.getTranslation(entity.isSneaking)) {
+                    with(renderStack.getTranslation(data)) {
                         matrices.translate(x, y, z)
                     }
 
-                    with(renderStack.getModelPart(contextModel as BipedEntityModel<PlayerEntity>, entity.isSneaking)) {
+                    with(renderStack.getModelPart(contextModel as BipedEntityModel<PlayerEntity>, data)) {
                         rotate(matrices)
                     }
 
-                    with(renderStack.getRotation(entity.isSneaking)) {
+                    with(renderStack.getRotation(data)) {
                         matrices.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(x))
                         matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(y))
                         matrices.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(z))
                     }
 
-                    with(renderStack.getScale(entity.isSneaking)) {
+                    with(renderStack.getScale(data)) {
                         matrices.scale(x, y, z)
                     }
 
@@ -70,7 +76,7 @@ class ToolFeatureRenderer<T : PlayerEntity, M : BipedEntityModel<T>>(
                         .renderItem(
                             entity,
                             stack,
-                            renderStack.getRenderMode(entity.isSneaking),
+                            renderStack.getRenderMode(data),
                             false,
                             matrices,
                             vertexConsumers,

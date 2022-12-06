@@ -10,10 +10,10 @@ import net.minecraft.util.math.Vec3d
 import net.minecraft.util.math.Vec3f
 
 interface BodyRender {
-    fun getScale(sneaking: Boolean): Vec3f
-    fun getTranslation(sneaking: Boolean): Vec3d
-    fun getRotation(sneaking: Boolean): Vec3f
+    fun getScale(data: PlayerData): Vec3f
+    fun getTranslation(data: PlayerData): Vec3d
+    fun getRotation(data: PlayerData): Vec3f
 
-    fun getRenderMode(sneaking: Boolean): Mode = Mode.FIXED
-    fun getModelPart(model: BipedEntityModel<PlayerEntity>, sneaking: Boolean): ModelPart = model.body
+    fun getRenderMode(data: PlayerData): Mode = Mode.FIXED
+    fun getModelPart(model: BipedEntityModel<PlayerEntity>, data: PlayerData): ModelPart = model.body
 }
