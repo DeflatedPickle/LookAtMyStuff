@@ -2,6 +2,10 @@
 
 package com.deflatedpickle.lookatmystuff
 
+import com.deflatedpickle.lookatmystuff.client.api.BodyRender
+import com.deflatedpickle.lookatmystuff.client.render.BodyClockItem
+import net.minecraft.item.Item
+import net.minecraft.item.Items
 import org.quiltmc.loader.api.ModContainer
 import org.quiltmc.qsl.base.api.entrypoint.ModInitializer
 
@@ -13,11 +17,11 @@ object LookAtMyStuff : ModInitializer {
     private const val AUTHOR = "$[author]"
     private const val VERSION = "$[version]"
 
+    val registry = mutableMapOf<Item, BodyRender>()
+
     override fun onInitialize(mod: ModContainer) {
         println(listOf(MOD_ID, NAME, GROUP, AUTHOR, VERSION))
-    }
 
-    fun init() {
-        println("ow!")
+        registry[Items.CLOCK] = BodyClockItem
     }
 }
