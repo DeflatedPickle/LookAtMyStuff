@@ -9,7 +9,9 @@
         "MixinAxeItem",
         "MixinHoeItem",
         "MixinShovelItem",
-        "MixinFishingRodItem"
+        "MixinFishingRodItem",
+        "MixinFlintAndSteelItem",
+        "MixinSpyglassItem"
     ],
     "minVersion": "0.8",
     "package": "${group}.${id}.mixin",
