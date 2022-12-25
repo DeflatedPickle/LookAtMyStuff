@@ -34,7 +34,7 @@
         ],
         "icon": "assets/${id}/icon.png",
         "intermediate_mappings": "net.fabricmc:intermediary",
-        "entrypoints": {"init": [{
+        "entrypoints": {"client_init": [{
             "adapter": "kotlin",
             "value": "${group}.${id}.${name}"
         }]},

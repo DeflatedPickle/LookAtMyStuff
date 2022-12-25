@@ -7,10 +7,10 @@ import com.deflatedpickle.lookatmystuff.client.render.BodyClockItem
 import net.minecraft.item.Item
 import net.minecraft.item.Items
 import org.quiltmc.loader.api.ModContainer
-import org.quiltmc.qsl.base.api.entrypoint.ModInitializer
+import org.quiltmc.qsl.base.api.entrypoint.client.ClientModInitializer
 
 @Suppress("UNUSED")
-object LookAtMyStuff : ModInitializer {
+object LookAtMyStuff : ClientModInitializer {
     private const val MOD_ID = "$[id]"
     private const val NAME = "$[name]"
     private const val GROUP = "$[group]"
@@ -19,7 +19,7 @@ object LookAtMyStuff : ModInitializer {
 
     val registry = mutableMapOf<Item, BodyRender>()
 
-    override fun onInitialize(mod: ModContainer) {
+    override fun onInitializeClient(mod: ModContainer) {
         println(listOf(MOD_ID, NAME, GROUP, AUTHOR, VERSION))
 
         registry[Items.CLOCK] = BodyClockItem
